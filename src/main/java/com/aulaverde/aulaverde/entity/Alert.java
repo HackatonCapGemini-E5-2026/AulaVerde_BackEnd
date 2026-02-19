@@ -30,7 +30,7 @@ public class Alert {
     private Integer percent_alert;
 
     @Column(nullable = false)
-    private Boolean solve;
+    private Boolean cleared;
 
     @Column(nullable = false)
     private LocalDate date;
