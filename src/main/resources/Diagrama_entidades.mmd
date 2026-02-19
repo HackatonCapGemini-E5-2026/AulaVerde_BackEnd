@@ -1,0 +1,29 @@
+erDiagram
+
+    CONTAINER {
+        serial      id              PK
+        int         percentFull
+        localdate   lastEmpty
+        boolean     needEmpty
+        varchar7    color
+        enum        category
+    }
+
+    WASTE {
+        serial      id              PK
+        double      weight
+        localdate   date
+        int         container_id    FK
+    }
+
+    ALERT {
+        serial      id              PK
+        varchar255  message
+        int         percentAlert
+        boolean     cleared
+        localdate   date
+        int         container_id    FK
+    }
+
+    CONTAINER ||--o{ WASTE  : "acumula"
+    CONTAINER ||--o{ ALERT  : "dispara"
