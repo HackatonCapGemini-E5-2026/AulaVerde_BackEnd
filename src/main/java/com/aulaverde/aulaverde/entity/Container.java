@@ -46,11 +46,11 @@ public class Container {
     private Category category;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "waste_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "container", cascade = CascadeType.ALL)
     private List<Waste> wastes;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "alert_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "container", cascade = CascadeType.ALL)
     private List<Alert> alerts;
 
 }
