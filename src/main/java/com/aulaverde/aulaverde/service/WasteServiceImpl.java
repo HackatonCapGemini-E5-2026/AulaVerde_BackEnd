@@ -30,14 +30,14 @@ public class WasteServiceImpl implements WasteService{
     @Override
     public Optional<Waste> getWasteById(int id) {
         Optional<Waste> optionalWaste = wasteRepository.findById(id);
-        if(optionalWaste.isEmpty()) throw new RuntimeException("No existe articulo con este id");
+        if(optionalWaste.isEmpty()) throw new RuntimeException("No existe residuo con este id");
         return optionalWaste;
     }
 
     @Override
     public void deleteWaste(int id) {
         Optional<Waste> optionalWaste = wasteRepository.findById(id);
-        if(optionalWaste.isEmpty()) throw new RuntimeException("No existe articulo con este id");
+        if(optionalWaste.isEmpty()) throw new RuntimeException("No existe residuo con este id");
         wasteRepository.delete(optionalWaste.get());
         }
 
