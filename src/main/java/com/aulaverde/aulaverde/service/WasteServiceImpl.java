@@ -15,14 +15,14 @@ public class WasteServiceImpl implements WasteService{
     private final WasteRepository wasteRepository;
     private final ContainerService containerService;
 
-    public WasteServiceImpl(WasteRepository wasteRepository,ContainerService containerService ){
-        this.wasteRepository = wasteRepository;
+    public WasteServiceImpl(WasteRepository wasteRepository, ContainerService containerService){
+        this.wasteRepository=wasteRepository;
         this.containerService = containerService;
     }
 
     @Override
     public Waste createWaste(Waste waste, int containerId) {
-        Container container = containerService.getContainerById(containerId).get();
+        Container container = containerService.getContainerById(containerId);
         waste.setContainer(container);
         Waste savedWaste = wasteRepository.save(waste);
         containerService.updateContainerWeight(containerId, savedWaste.getWeight());

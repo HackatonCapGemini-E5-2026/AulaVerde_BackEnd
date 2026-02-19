@@ -39,8 +39,8 @@ public class ContainerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Container> getContainerByid(@PathVariable int id) {
-        Container container = containerService.getContainerById(id).get();
+    public ResponseEntity<Container> getContainerByid(@PathVariable int id){
+        Container container = containerService.getContainerById(id);
         return new ResponseEntity<>(container, HttpStatus.OK);
     }
 

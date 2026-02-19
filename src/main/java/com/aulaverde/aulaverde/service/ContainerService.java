@@ -13,7 +13,7 @@ public interface ContainerService {
 
     public List<Container> getAllContainers();
 
-    Optional<Container> getContainerById(Integer containerId);
+    Container getContainerById(int containerId);
 
     public void deleteContainer(Integer id);
 

@@ -2,6 +2,7 @@ package com.aulaverde.aulaverde.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aulaverde.aulaverde.entity.Container;
 import com.aulaverde.aulaverde.entity.Waste;
 import com.aulaverde.aulaverde.service.WasteService;
 
