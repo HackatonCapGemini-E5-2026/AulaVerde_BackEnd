@@ -2,6 +2,7 @@ package com.aulaverde.aulaverde.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aulaverde.aulaverde.entity.Container;
 import com.aulaverde.aulaverde.entity.Waste;
 import com.aulaverde.aulaverde.service.WasteService;
 
@@ -29,10 +30,10 @@ public class WasteController {
             this.wasteService = wasteService;
         }
 
-    @PostMapping()
-    public ResponseEntity<Waste> createWaste(@RequestBody Waste waste) {
-        Waste newWaste = wasteService.createWaste(waste);
-        return new ResponseEntity<>(newWaste, HttpStatus.CREATED) ;
+    @PostMapping
+    public ResponseEntity<Waste> createWaste (@RequestBody Waste waste, @PathVariable int containerId ){
+        Waste newWaste =  wasteService.createWaste(waste, containerId);
+        return new ResponseEntity<>(newWaste, HttpStatus.CREATED);
     }
 
     @GetMapping
