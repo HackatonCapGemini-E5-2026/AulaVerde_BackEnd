@@ -30,7 +30,7 @@ public class WasteController {
             this.wasteService = wasteService;
         }
 
-    @PostMapping
+    @PostMapping("/{containerId}")
     public ResponseEntity<Waste> createWaste (@RequestBody Waste waste, @PathVariable int containerId ){
         Waste newWaste =  wasteService.createWaste(waste, containerId);
         return new ResponseEntity<>(newWaste, HttpStatus.CREATED);

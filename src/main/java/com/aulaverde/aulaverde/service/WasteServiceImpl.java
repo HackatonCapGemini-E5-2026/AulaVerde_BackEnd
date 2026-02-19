@@ -22,7 +22,7 @@ public class WasteServiceImpl implements WasteService{
 
     @Override
     public Waste createWaste(Waste waste, int containerId) {
-        Container container = containerService.getContainerById(Integer containerId);
+        Container container = containerService.getContainerById(containerId);
         waste.setContainer(container);
         return wasteRepository.save(waste);
     }
