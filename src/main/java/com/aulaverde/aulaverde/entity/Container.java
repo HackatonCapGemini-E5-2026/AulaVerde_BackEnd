@@ -1,5 +1,8 @@
 package com.aulaverde.aulaverde.entity;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import com.aulaverde.aulaverde.entity.enums.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,11 +16,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Locale.Category;
-
 
 
 @Entity
@@ -34,7 +32,7 @@ public class Container {
     private Integer percentFull;
 
     @Column(nullable = false)
-    private Timestamp lastEmpty;
+    private LocalDateTime lastEmpty;
 
     @Column(nullable = false)
     private Boolean needEmpty;
