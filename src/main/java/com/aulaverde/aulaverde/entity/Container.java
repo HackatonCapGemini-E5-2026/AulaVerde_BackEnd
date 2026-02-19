@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "container")
+@Table(name = "containers")
 @Data
 @NoArgsConstructor
 public class Container {
@@ -39,6 +39,12 @@ public class Container {
 
     @Column(nullable = false)
     private String color;
+
+    @Column(nullable = false)
+    private Double maxWeightKg = 500.00;
+
+    @Column(nullable = false)
+    private Double currentWeightKg = 0.0;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

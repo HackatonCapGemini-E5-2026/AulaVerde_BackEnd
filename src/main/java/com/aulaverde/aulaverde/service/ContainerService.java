@@ -9,11 +9,14 @@ public interface ContainerService {
 
     public Container createContainer(Container container);
 
+    void updateContainerWeight(Integer containerId, Double newWasteWeight);
+
     public List<Container> getAllContainers();
 
     Optional<Container> getContainerById(Integer containerId);
 
     public void deleteContainer(Integer id);
 
+    void emptyContainer(Integer containerId);
 
 }
