@@ -28,8 +28,10 @@ public class ContainerServiceImpl implements ContainerService {
     }
 
     @Override
-    public Optional<Container> getContainerById(Integer containerId){
-        return containerRepository.findById(containerId);
+    public Container getContainerById(int containerId){
+        Optional<Container> container = containerRepository.findById(containerId);
+        if(container.isEmpty()) throw new RuntimeException("No existe container con este id");
+        return container.get();
     }
 
     @Override
