@@ -1,0 +1,71 @@
+flowchart TD
+    Start([Usuario abre la app]) --> Welcome["🌿 BIENVENIDO/A A AULAVERDE<br/>Gestiona los residuos de tu<br/>colegio de forma sostenible"]
+
+    Welcome --> MainMenu["Ve MENÚ PRINCIPAL:<br/>1. Registrar Residuos<br/>2. Listado de Residuos<br/>3. Alertas<br/><br/>Pulsa una opción"]
+
+    MainMenu --> UserInput1{Usuario<br/>pulsa opción}
+
+    %% ==================== OPCIÓN 1: REGISTRAR RESIDUOS ====================
+    UserInput1 -->|"1"| RegCat["Ve PANTALLA:<br/>📋 REGISTRAR RESIDUO<br/><br/>Selecciona el tipo de residuo<br/>recolectado hoy en el aula:<br/><br/>📄 Papel<br/>🧴 Plástico/Metal<br/>🍾 Vidrio<br/>🍎 Orgánico<br/>⚠ Peligrosos<br/>🗑 General"]
+
+    RegCat --> UserSelectCat[Usuario selecciona categoría]
+    UserSelectCat --> RegKg["Ve CAMPO:<br/>⚖ Introduce la cantidad<br/>en kilogramos (kg):"]
+    RegKg --> UserTypeKg[Usuario escribe cantidad en kg]
+    UserTypeKg --> RegDate["Ve CAMPO:<br/>📅 Fecha del registro:<br/><br/>Por defecto: fecha de hoy<br/>(modificable)"]
+    RegDate --> UserConfirmDate[Usuario confirma o cambia fecha]
+    UserConfirmDate --> RegBtn["Ve BOTÓN:<br/>──────────────────<br/>  REGISTRAR RESIDUO<br/>──────────────────"]
+    RegBtn --> UserPressBtn[Usuario pulsa REGISTRAR RESIDUO]
+    UserPressBtn --> RegModal{"Ve MODAL:<br/>¿Estás seguro de<br/>registrar este residuo?<br/><br/>[ SÍ ]   [ NO ]"}
+
+    RegModal -->|"NO"| RegBack["Ve PANTALLA:<br/>↩ Vuelve a la pantalla<br/>de registro con los<br/>datos anteriores"]
+    RegBack --> RegCat
+
+    RegModal -->|"SÍ"| RegSuccess["Ve PANTALLA:<br/>✅ RESIDUO REGISTRADO<br/>CORRECTAMENTE<br/><br/>El residuo ha sido<br/>añadido al inventario"]
+
+    RegSuccess -->|"Redirige automáticamente"| MainMenu
+
+    %% ==================== OPCIÓN 2: LISTADO DE RESIDUOS ====================
+    UserInput1 -->|"2"| ListCat["Ve PANTALLA:<br/>📊 CATEGORÍAS<br/>Monitoreo de residuos en tiempo real<br/><br/>🔍 Buscar categoría...<br/><br/>📄 Papel ━━━━━━━━━━━━ 100%  🗑<br/>🧴 Plástico/Metal ━━━ 85%   🗑<br/>🍾 Vidrio ━━━━━━━━━━━ 32%   🗑<br/>🍎 Orgánico ━━━━━━━━ 28%   🗑<br/>🗑 General ━━━━━━━━━ 14%   🗑<br/>⚠ Peligrosos ━━━━━━ 2%    🗑"]
+
+    ListCat -->|"← Atrás"| MainMenu
+    ListCat --> UserClickBin[Usuario pulsa 🗑 de una categoría]
+
+    UserClickBin --> ListVaciarModal{"Ve MODAL:<br/>🗑 ¿VACIAR CONTENEDOR?<br/><br/>Vas a vaciar el contenedor<br/>de [categoría].<br/>El contador volverá a 0%.<br/><br/>[ SÍ ]   [ NO ]"}
+
+    ListVaciarModal -->|"NO"| ListCat
+    ListVaciarModal -->|"SÍ"| ListVaciarSuccess["Ve MENSAJE:<br/>✅ CONTENEDOR VACIADO<br/><br/>El contenedor de [categoría]<br/>ha sido vaciado.<br/>Contador → 0%"]
+    ListVaciarSuccess -->|"← Atrás"| ListCat
+
+    %% ==================== OPCIÓN 3: ALERTAS ====================
+    UserInput1 -->|"3"| AlertasMenu["Ve PANTALLA:<br/>🔔 ALERTAS<br/><br/>Lista de alertas activas<br/>generadas por el sistema"]
+
+    AlertasMenu -->|"← Atrás"| MainMenu
+    AlertasMenu --> UserInputAlert{Tipo de<br/>alerta}
+
+    UserInputAlert -->|"Nivel 70%"| Alert70["Ve ALERTA INFORMATIVA:<br/>ℹ ATENCIÓN<br/><br/>El contenedor de [categoría]<br/>está al 70%.<br/>Próximo a llenarse"]
+
+    UserInputAlert -->|"Nivel 90%"| Alert90["Ve ALERTA URGENTE:<br/>🚨 NIVEL CRÍTICO<br/><br/>El contenedor de [categoría]<br/>está casi lleno al 90%.<br/>¡Vacíalo pronto!"]
+
+    Alert70 -->|"← Atrás"| AlertasMenu
+    Alert90 -->|"← Atrás"| AlertasMenu
+
+    %% ==================== SISTEMA: TRIGGERS AUTOMÁTICOS ====================
+    Sys70(["⚙ SISTEMA<br/>Contenedor llega al 70%"]) -->|genera alerta| Alert70
+    Sys90(["⚙ SISTEMA<br/>Contenedor llega al 90%"]) -->|genera alerta| Alert90
+
+    %% ==================== ESTILOS ====================
+    classDef userAction fill:#4CAF50,stroke:#2E7D32,stroke-width:3px,color:#fff
+    classDef screenShow fill:#00897B,stroke:#00695C,stroke-width:3px,color:#fff
+    classDef decision   fill:#FFB300,stroke:#E65100,stroke-width:3px,color:#1A2E35
+    classDef startEnd   fill:#006064,stroke:#004D40,stroke-width:3px,color:#fff
+    classDef danger     fill:#E53935,stroke:#B71C1C,stroke-width:3px,color:#fff
+    classDef system     fill:#78909C,stroke:#546E7A,stroke-width:2px,color:#fff
+    classDef success    fill:#2E7D32,stroke:#1B5E20,stroke-width:3px,color:#fff
+
+    class Start startEnd
+    class Welcome,MainMenu,RegCat,RegKg,RegDate,RegBtn,RegBack,AlertasMenu,Alert70,ListCat screenShow
+    class UserInput1,RegModal,ListVaciarModal,UserInputAlert decision
+    class UserSelectCat,UserTypeKg,UserConfirmDate,UserPressBtn,UserClickBin userAction
+    class Alert90 danger
+    class RegSuccess,ListVaciarSuccess success
+    class Sys70,Sys90 system
