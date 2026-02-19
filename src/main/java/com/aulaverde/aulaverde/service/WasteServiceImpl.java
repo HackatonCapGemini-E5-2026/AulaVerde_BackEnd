@@ -24,7 +24,9 @@ public class WasteServiceImpl implements WasteService{
     public Waste createWaste(Waste waste, int containerId) {
         Container container = containerService.getContainerById(containerId);
         waste.setContainer(container);
-        return wasteRepository.save(waste);
+        Waste savedWaste = wasteRepository.save(waste);
+        containerService.updateContainerWeight(containerId, savedWaste.getWeight());
+        return savedWaste;
     }
 
     @Override
