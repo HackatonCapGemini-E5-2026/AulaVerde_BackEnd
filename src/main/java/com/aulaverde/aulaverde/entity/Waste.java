@@ -28,7 +28,7 @@ public class Waste {
     private LocalDate date;
 
     @ManyToOne
-    @JoinColumn(name = "container_id" , nullable = true, referencedColumnName = "id")
+    @JoinColumn(name = "container_id" , referencedColumnName = "id")
     private Container container;
 
 }
