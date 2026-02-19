@@ -27,7 +27,7 @@ public class Alert {
     private String message;
 
     @Column(nullable = false)
-    private Integer percent_alert;
+    private Integer percentAlert;
 
     @Column(nullable = false)
     private Boolean solve;
