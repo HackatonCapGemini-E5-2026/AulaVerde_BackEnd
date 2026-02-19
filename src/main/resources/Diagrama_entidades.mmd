@@ -1,22 +1,24 @@
 erDiagram
 
-    CONTAINER {
+    CONTAINERS {
         serial      id              PK
         int         percentFull
         localdate   lastEmpty
         boolean     needEmpty
         varchar7    color
         enum        category
+        double      current_weight_kg
+        double      max_weight_kg
     }
 
-    WASTE {
+    WASTES {
         serial      id              PK
         double      weight
         localdate   date
         int         container_id    FK
     }
 
-    ALERT {
+    ALERTS {
         serial      id              PK
         varchar255  message
         int         percentAlert
@@ -25,5 +27,5 @@ erDiagram
         int         container_id    FK
     }
 
-    CONTAINER ||--o{ WASTE  : "acumula"
-    CONTAINER ||--o{ ALERT  : "dispara"
+    CONTAINERS ||--o{ WASTES  : "acumula"
+    CONTAINERS ||--o{ ALERTS  : "dispara"

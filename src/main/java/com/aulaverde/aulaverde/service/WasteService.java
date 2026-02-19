@@ -7,7 +7,7 @@ import com.aulaverde.aulaverde.entity.Waste;
 
 public interface WasteService {
 
-    public Waste createWaste(Waste waste);
+    public Waste createWaste(Waste waste, int containerId);
 
     public List<Waste> getAllWaste();
 
